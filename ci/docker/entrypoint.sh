@@ -11,5 +11,20 @@ echo "Starting with UID : $USER_ID"
 groupadd --gid $USER_ID build_user
 useradd --shell /bin/bash --uid $USER_ID --gid $USER_ID --comment "User for container" --create-home build_user
 
+EMULATOR_NAME="emulator_${VERSION}"
+SD_CARD_NAME="/sdcard.img"
+
+echo "Run $EMULATOR_NAME with abi: x86 (Version: $VERSION)"
+echo "no" | /opt/android-sdk/emulator/emulator \
+    -avd ${EMULATOR_NAME} \
+    -sdcard ${SD_CARD_NAME} \
+    -verbose \
+    -no-audio \
+    -no-window \
+    -no-cache \
+    -no-snapshot \
+    -no-boot-anim \
+    -qemu
+
 # Run original docker run command as build_user.
 sudo --set-home --preserve-env -u build_user "$@"

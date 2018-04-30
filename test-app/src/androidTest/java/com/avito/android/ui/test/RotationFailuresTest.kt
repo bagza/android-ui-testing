@@ -5,6 +5,7 @@ import android.support.test.espresso.contrib.ActivityResultMatchers
 import com.avito.android.test.Device
 import com.avito.android.ui.StartForResultActivity
 import org.junit.Assert
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 
@@ -14,6 +15,7 @@ class RotationFailuresTest {
     @Rule @JvmField
     val rule = screenRule<StartForResultActivity>(launchActivity = true)
 
+    @Ignore("need isolation")
     @Test
     fun activity_is_not_finishing_on_finish_call_after_rotation() {
         Device.rotate()
